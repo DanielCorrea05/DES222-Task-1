@@ -1,0 +1,223 @@
+/* 
+Color pallete. This section defines variables for the color pallete,
+so that we can refer to particular colors by name instead of hexadecimal values.
+This is applied to the 'root' psuedo-element, which just means that these color
+variables are available to be used anywhere in our html document
+*/
+:root {
+<<<<<<< Updated upstream
+    --color1: #FFCDB2;
+    --color2: #FFB4A2;
+    --color3: #E5989B;
+    --color4: #B5838D;
+    --color5: #6D6875;
+    --white-font: #FFFFFF;
+    --black-font: #000000;
+}
+
+
+/* Defines the main container size, we are limiting to 1140px max and centring in the viewport */
+.main-container {
+    max-width: 72em;
+    margin: 0 auto;
+    font: 1em Helvetica, arial, sans-serif;
+    color: var(--white-font);
+=======
+    --white: #FFFFFF;
+    --black: #000000;
+    /* add in other color variables for color palette */
+}
+
+/* The body of the document has a white background and is set up as a vertical flexbox. */
+body {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Defines the main container size, we are limiting to 72em max */
+.main-container {
+    max-width: 72em;
+    font-family: Inter;
+    /* TODO: set the main font color */
+>>>>>>> Stashed changes
+}
+
+
+.main-container > * {
+    min-height: 2em;
+}
+  
+
+/* Here we define the aspects of style of our elements other than their grid layout */
+
+.banner {
+    background-color: var(--color4);
+    min-height: 8em;
+    padding: 1em;
+}
+
+.banner-title {
+    font-size: 3em;
+}
+
+.banner-subtitle {
+    font-size: 2em;
+}
+
+.team-member-card-panel {
+    display: contents;
+}
+
+.team-member-card {
+    /* max-width: 32em; */
+    min-height: 32em;
+    background-color: var(--color3);
+    display: flex;
+    flex-direction: column;
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+.team-member-card-image {
+    max-width: 100%;
+}
+
+.team-member-card-blurb {
+    padding: 0.5em;
+}
+
+
+.team-description {
+    background-color: beige;
+}
+
+.section-header {
+    background-color: var(--color5);
+}
+
+.content-card {
+    background-color: var(--color2);
+}
+
+
+/* now we create names for the grid areas for specific elements */
+#banner {
+    grid-area: bn1;
+}
+
+
+#teamMemberCard1 {
+    grid-area: tm1;
+}
+
+#teamMemberCard2 {
+    grid-area: tm2;
+}
+
+#teamMemberCard3 {
+    grid-area: tm3;
+}
+
+#teamDescription {
+    grid-area: td1;
+}
+
+#storiesSectionHeader {
+    grid-area: sh1;
+}
+
+#storyCard1 {
+    grid-area: sc1;
+}
+
+#storyCard2 {
+    grid-area: sc2;
+}
+
+#storyCard3 {
+    grid-area: sc3;
+}
+
+
+/* Use a 12 column flexible layout grid */
+/* For vertical layout we use a margin, rather than grid-rows */
+.main-container {
+    display: grid;
+    /* grid-template-columns: repeat(12, [col-start] 1fr); */
+    /* grid-auto-rows: 32px; */
+    column-gap: 1em;
+}
+  
+/* 
+Responsive Layout breakpoints. We start 'mobile-first' i.e. we define how the layout should look
+for the smallest screen sizes. In this case we want a single column that spans the main container.
+Because this CSS definition comes first, it will apply by default. Then we override it below with 
+media queries for progressively bigger screen widths
+*/
+.main-container {
+    grid-template:
+        "bn1 bn1 bn1 bn1" minmax(8em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "tm1 tm1 tm1 tm1" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "tm2 tm2 tm2 tm2" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "tm3 tm3 tm3 tm3" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "td1 td1 td1 td1" minmax(14em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "sh1 sh1 sh1 sh1" minmax(8em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "sc1 sc1 sc1 sc1" minmax(68em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "sc2 sc2 sc2 sc2" minmax(68em, auto)
+        " .   .   .   . " minmax(2em, auto)
+        "sc3 sc3 sc3 sc3" minmax(68em, auto)
+}
+    
+
+
+@media (min-width: 32em) and (max-resolution: 200dpi) {
+    .main-container {
+        grid-template:
+        "bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1" minmax(8em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "tm1 tm1 tm1 tm1 tm2 tm2 tm2 tm2" minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        " .   .  tm3 tm3 tm3 tm3  .   . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "td1 td1 td1 td1 td1 td1 td1 td1" minmax(14em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1" minmax(8em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1" minmax(68em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2" minmax(68em, auto)
+        " .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3" minmax(68em, auto)   
+    }
+}
+
+
+
+@media (min-width: 50em) and (max-resolution: 200dpi) {
+    .main-container {
+        grid-template:
+        "bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1" minmax(8em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "tm1 tm1 tm1 tm1 tm2 tm2 tm2 tm2 tm3 tm3 tm3 tm3" minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1" minmax(14em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1" minmax(8em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1" minmax(68em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2" minmax(68em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        "sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3" minmax(68em, auto)   
+    }
+}
+
