@@ -5,7 +5,6 @@ This is applied to the 'root' psuedo-element, which just means that these color
 variables are available to be used anywhere in our html document
 */
 :root {
-<<<<<<< Updated upstream
     --color1: #FFCDB2;
     --color2: #FFB4A2;
     --color3: #E5989B;
@@ -15,6 +14,12 @@ variables are available to be used anywhere in our html document
     --black-font: #000000;
 }
 
+html, body {
+    background-color: var(--black-font); /* Or use #000000 directly */
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 /* Defines the main container size, we are limiting to 1140px max and centring in the viewport */
 .main-container {
@@ -22,26 +27,6 @@ variables are available to be used anywhere in our html document
     margin: 0 auto;
     font: 1em Helvetica, arial, sans-serif;
     color: var(--white-font);
-=======
-    --white: #FFFFFF;
-    --black: #000000;
-    /* add in other color variables for color palette */
-}
-
-/* The body of the document has a white background and is set up as a vertical flexbox. */
-body {
-    background-color: var(--white);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Defines the main container size, we are limiting to 72em max */
-.main-container {
-    max-width: 72em;
-    font-family: Inter;
-    /* TODO: set the main font color */
->>>>>>> Stashed changes
 }
 
 
@@ -60,10 +45,12 @@ body {
 
 .banner-title {
     font-size: 3em;
+    color: var(--white-font);
 }
 
 .banner-subtitle {
     font-size: 2em;
+    color: var(--white-font);
 }
 
 .team-member-card-panel {
@@ -72,20 +59,29 @@ body {
 
 .team-member-card {
     /* max-width: 32em; */
-    min-height: 32em;
-    background-color: var(--color3);
+    height: 32em;
     display: flex;
-    flex-direction: column;
-    border-radius: 1em;
+    flex-direction: row;
+    border-radius: 0.50em;
     overflow: hidden;
+    gap: 1.25em;
 }
 
 .team-member-card-image {
-    max-width: 100%;
+    width: 66.6%; /* Image takes left half */
+    object-fit: cover; /* Ensures image fills its area nicely */
+    height: 100%;
+    border-radius: 0.50em;
 }
 
 .team-member-card-blurb {
-    padding: 0.5em;
+    width: 33.3%;
+    min-width: 33.3%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1.25em;
 }
 
 
@@ -100,13 +96,6 @@ body {
 .content-card {
     background-color: var(--color2);
 }
-
-
-/* now we create names for the grid areas for specific elements */
-#banner {
-    grid-area: bn1;
-}
-
 
 #teamMemberCard1 {
     grid-area: tm1;
@@ -145,8 +134,8 @@ body {
 /* For vertical layout we use a margin, rather than grid-rows */
 .main-container {
     display: grid;
-    /* grid-template-columns: repeat(12, [col-start] 1fr); */
-    /* grid-auto-rows: 32px; */
+    grid-template-columns: repeat(12, [col-start] 1fr);
+    grid-auto-rows: 32px;
     column-gap: 1em;
 }
   
@@ -158,8 +147,7 @@ media queries for progressively bigger screen widths
 */
 .main-container {
     grid-template:
-        "bn1 bn1 bn1 bn1" minmax(8em, auto)
-        " .   .   .   . " minmax(2em, auto)
+        " .   .   .   . " minmax(2em, auto)    
         "tm1 tm1 tm1 tm1" minmax(32em, auto)
         " .   .   .   . " minmax(2em, auto)
         "tm2 tm2 tm2 tm2" minmax(32em, auto)
@@ -182,7 +170,6 @@ media queries for progressively bigger screen widths
 @media (min-width: 32em) and (max-resolution: 200dpi) {
     .main-container {
         grid-template:
-        "bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1" minmax(8em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
         "tm1 tm1 tm1 tm1 tm2 tm2 tm2 tm2" minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
@@ -205,9 +192,12 @@ media queries for progressively bigger screen widths
 @media (min-width: 50em) and (max-resolution: 200dpi) {
     .main-container {
         grid-template:
-        "bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1 bn1" minmax(8em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "tm1 tm1 tm1 tm1 tm2 tm2 tm2 tm2 tm3 tm3 tm3 tm3" minmax(32em, auto)
+        " .  tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        " .  tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
+        " .  tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
         "td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1" minmax(14em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
@@ -221,3 +211,19 @@ media queries for progressively bigger screen widths
     }
 }
 
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+.team-member-card {
+  animation: appear linear both;
+  animation-timeline: view();
+  animation-range: 
+    entry 0% cover 40%,  /* Appear during first 40% of entry */
+    exit 60% cover 100%; /* Disappear during last 40% of exit */
+}
