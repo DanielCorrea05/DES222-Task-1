@@ -1,9 +1,3 @@
-/* 
-Color pallete. This section defines variables for the color pallete,
-so that we can refer to particular colors by name instead of hexadecimal values.
-This is applied to the 'root' psuedo-element, which just means that these color
-variables are available to be used anywhere in our html document
-*/
 :root {
     --color1: #FFCDB2;
     --color2: #FFB4A2;
@@ -15,13 +9,18 @@ variables are available to be used anywhere in our html document
 }
 
 html, body {
-    background-color: var(--black-font); /* Or use #000000 directly */
     margin: 0;
     padding: 0;
     height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-/* Defines the main container size, we are limiting to 1140px max and centring in the viewport */
+body {
+  transition: background 0.6s ease-in-out;
+}
+
 .main-container {
     max-width: 72em;
     margin: 0 auto;
@@ -29,109 +28,230 @@ html, body {
     color: var(--white-font);
 }
 
-
 .main-container > * {
     min-height: 2em;
 }
-  
-
-/* Here we define the aspects of style of our elements other than their grid layout */
 
 .banner {
-    background-color: var(--color4);
-    min-height: 8em;
-    padding: 1em;
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgba(0, 123, 255, 0));
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0);
+    font-size: 1.20em;
+    text-align: center;
+    gap: 2em;
 }
 
 .banner-title {
     font-size: 3em;
-    color: var(--white-font);
+    color: var(--black-font);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .banner-subtitle {
     font-size: 2em;
-    color: var(--white-font);
+    color: var(--black-font);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.team-member-card-panel {
+.content-section {
     display: contents;
 }
 
-.team-member-card {
-    /* max-width: 32em; */
-    height: 32em;
+/* Horizontal Cards */
+
+.horizontal-card {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     border-radius: 0.50em;
-    overflow: hidden;
     gap: 1.25em;
+
+
+    opacity: 0;
+    translate: -50%;
+    transition: 600ms ease;
 }
 
-.team-member-card-image {
-    width: 66.6%; /* Image takes left half */
-    object-fit: cover; /* Ensures image fills its area nicely */
+.horizontal-card.show {
+    opacity: 1;
+    translate: 0;
+}
+
+.horizontal-content-image {
+    width: 66.6%;
+    object-fit: cover;
     height: 100%;
     border-radius: 0.50em;
+    overflow: hidden;
 }
 
-.team-member-card-blurb {
+.horizontal-content-blurb {
     width: 33.3%;
     min-width: 33.3%;
-    padding: 1em;
+    font-size: 1.10em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     margin: 1.25em;
+    padding: 1em;
 }
 
+/* Vertical Cards */
 
-.team-description {
-    background-color: beige;
+.vertical-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0.50em;
+    gap: 1.25em;
+
+    opacity: 0;
+    translate: -50%;
+    transition: 600ms ease;
 }
 
-.section-header {
-    background-color: var(--color5);
+.vertical-card.show {
+    opacity: 1;
+    translate: 0;
 }
 
-.content-card {
-    background-color: var(--color2);
+.vertical-content-image {
+    width: 80%;
+    height: 30em;
+    object-fit: cover;
+    border-radius: 0.50em;
+    margin: 1.25em auto; 
 }
 
-#teamMemberCard1 {
-    grid-area: tm1;
+.vertical-content-blurb {
+    width: 65%;
+    height: 25%;
+    font-size: 1.10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 1.25em auto;
 }
 
-#teamMemberCard2 {
-    grid-area: tm2;
+/* Backgrounds */
+
+.bg-layer {
+  position: fixed;
+  background-position: center center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.8s ease-in-out;
+  z-index: -1;
 }
 
-#teamMemberCard3 {
-    grid-area: tm3;
+.bg-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.8) 10%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 90%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
 }
 
-#teamDescription {
-    grid-area: td1;
+#bgBlack {
+  background: black;
+  opacity: 1;
 }
 
-#storiesSectionHeader {
-    grid-area: sh1;
+#bg0 {
+  background: black;
+  opacity: 1;
 }
 
-#storyCard1 {
-    grid-area: sc1;
+#bg1 {
+  background-image: url("./images/background1.png");
+  height: 100%;
+  width: 100%;
+  opacity: 0;
 }
 
-#storyCard2 {
-    grid-area: sc2;
+#bg2 {
+  background-image: url("./images/background2.png");
+  opacity: 0;
 }
 
-#storyCard3 {
-    grid-area: sc3;
+#bg3 {
+  background-image: url("./images/background3.png");
+  opacity: 0;
 }
 
+#bg4 {
+  background-image: url("./images/background4.png");
+  opacity: 0;
+}
 
-/* Use a 12 column flexible layout grid */
-/* For vertical layout we use a margin, rather than grid-rows */
+#bm1, #bm2, #bm3, #bm4{
+  display: none;
+}
+
+/* Grid IDs */
+
+#a1 {
+    grid-area: aa1;
+}
+
+#b1 {
+    grid-area: bb1;
+}
+
+#ab2 {
+    grid-area: ab2;
+}
+
+#c2 {
+    grid-area: cc2;
+}
+
+#a3 {
+    grid-area: aa3;
+}
+
+#b3 {
+    grid-area: bb3;
+}
+
+#a4 {
+    grid-area: aa4;
+}
+
+#b4 {
+    grid-area: bb4;
+}
+
+#c4 {
+    grid-area: cc4;
+}
+
+#verticalTransition1 {
+    grid-area: vt1;
+}
+
+#verticalTransition2 {
+    grid-area: vt2;
+}
+
+#verticalTransition3 {
+    grid-area: vt3;
+}
+
+#verticalTransition4 {
+    grid-area: vt4;
+}
+
+/* Container Grid */
+
 .main-container {
     display: grid;
     grid-template-columns: repeat(12, [col-start] 1fr);
@@ -139,30 +259,34 @@ html, body {
     column-gap: 1em;
 }
   
-/* 
-Responsive Layout breakpoints. We start 'mobile-first' i.e. we define how the layout should look
-for the smallest screen sizes. In this case we want a single column that spans the main container.
-Because this CSS definition comes first, it will apply by default. Then we override it below with 
-media queries for progressively bigger screen widths
-*/
 .main-container {
     grid-template:
+        " .   .   .   . " minmax(8em, auto)    
+        "vt1 vt1 vt1 vt1" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "aa1 aa1 aa1 aa1" minmax(32em, auto)
         " .   .   .   . " minmax(2em, auto)    
-        "tm1 tm1 tm1 tm1" minmax(32em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "tm2 tm2 tm2 tm2" minmax(32em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "tm3 tm3 tm3 tm3" minmax(32em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "td1 td1 td1 td1" minmax(14em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "sh1 sh1 sh1 sh1" minmax(8em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "sc1 sc1 sc1 sc1" minmax(68em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "sc2 sc2 sc2 sc2" minmax(68em, auto)
-        " .   .   .   . " minmax(2em, auto)
-        "sc3 sc3 sc3 sc3" minmax(68em, auto)
+        "bb1 bb1 bb1 bb1" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "vt2 vt2 vt2 vt2" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "ab2 ab2 ab2 ab2" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)    
+        "cc2 cc2 cc2 cc2" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "vt3 vt3 vt3 vt3" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "aa3 aa3 aa3 aa3" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)    
+        "bb3 bb3 bb3 bb3" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "vt4 vt4 vt4 vt4" minmax(32em, auto)
+        " .   .   .   . " minmax(24em, auto)    
+        "aa4 aa4 aa4 aa4" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)    
+        "bb4 bb4 bb4 bb4" minmax(32em, auto)
+        " .   .   .   . " minmax(2em, auto)    
+        "cc4 cc4 cc4 cc4" minmax(32em, auto)
 }
     
 
@@ -170,20 +294,41 @@ media queries for progressively bigger screen widths
 @media (min-width: 32em) and (max-resolution: 200dpi) {
     .main-container {
         grid-template:
+        " .   .   .   .   .   .   .   . " minmax(8em, auto)
+        " .  vt1 vt1 vt1 vc1 vc1 vc1  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  aa1 aa1 aa1 aa1 aa1 aa1  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "tm1 tm1 tm1 tm1 tm2 tm2 tm2 tm2" minmax(32em, auto)
+        " .  bb1 bb1 bb1 bb1 bb1 bb1  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(8em, auto)
+        " .  vt2 vt2 vt2 vt2 vt2 vt2  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  ab2 ab2 ab2 ab2 ab2 ab2  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        " .   .  tm3 tm3 tm3 tm3  .   . " minmax(32em, auto)
+        " .  cc2 cc2 cc2 cc2 cc2 cc2  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  vt3 vt3 vt3 vt3 vt3 vt3  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  aa3 aa3 aa3 aa3 aa3 aa3  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "td1 td1 td1 td1 td1 td1 td1 td1" minmax(14em, auto)
+        " .  bb3 bb3 bb3 bb3 bb3 bb3  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  vt4 vt4 vt4 vt4 vt4 vt4  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   . " minmax(24em, auto)
+        " .  aa4 aa4 aa4 aa4 aa4 aa4  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1" minmax(8em, auto)
+        " .  bb4 bb4 bb4 bb4 bb4 bb4  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1" minmax(68em, auto)
-        " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2" minmax(68em, auto)
-        " .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3" minmax(68em, auto)   
+        " .  cc4 cc4 cc4 cc4 cc4 cc4  . " minmax(32em, auto)
+    }
+    .vertical-content-blurb {
+        font-size: 1.20em;
+    }
+    .horizontal-content-blurb {
+        font-size: 1.20em;
+    }
+    .banner {
+        font-size: 1.40em;
     }
 }
 
@@ -192,38 +337,40 @@ media queries for progressively bigger screen widths
 @media (min-width: 50em) and (max-resolution: 200dpi) {
     .main-container {
         grid-template:
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(16em, auto)
+        " .  vt1 vt1 vt1 vt1 vt1 vt1 vt1 vt1 vt1 vt1  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  aa1 aa1 aa1 aa1 aa1 aa1 aa1 aa1 aa1 aa1  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        " .  tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1 tm1  . " minmax(32em, auto)
+        " .  bb1 bb1 bb1 bb1 bb1 bb1 bb1 bb1 bb1 bb1  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  vt2 vt2 vt2 vt2 vt2 vt2 vt2 vt2 vt2 vt2  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  ab2 ab2 ab2 ab2 ab2 ab2 ab2 ab2 ab2 ab2  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        " .  tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2 tm2  . " minmax(32em, auto)
+        " .  cc2 cc2 cc2 cc2 cc2 cc2 cc2 cc2 cc2 cc2  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  vt3 vt3 vt3 vt3 vt3 vt3 vt3 vt3 vt3 vt3  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  aa3 aa3 aa3 aa3 aa3 aa3 aa3 aa3 aa3 aa3  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        " .  tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3 tm3  . " minmax(32em, auto)
+        " .  bb3 bb3 bb3 bb3 bb3 bb3 bb3 bb3 bb3 bb3  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  vt4 vt4 vt4 vt4 vt4 vt4 vt4 vt4 vt4 vt4  . " minmax(32em, auto)
+        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(32em, auto)
+        " .  aa4 aa4 aa4 aa4 aa4 aa4 aa4 aa4 aa4 aa4  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1 td1" minmax(14em, auto)
+        " .  bb4 bb4 bb4 bb4 bb4 bb4 bb4 bb4 bb4 bb4  . " minmax(32em, auto)
         " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1 sh1" minmax(8em, auto)
-        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1 sc1" minmax(68em, auto)
-        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2 sc2" minmax(68em, auto)
-        " .   .   .   .   .   .   .   .   .   .   .   . " minmax(2em, auto)
-        "sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3 sc3" minmax(68em, auto)   
+        " .  cc4 cc4 cc4 cc4 cc4 cc4 cc4 cc4 cc4 cc4  . " minmax(32em, auto)
     }
-}
-
-      @keyframes appear {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-.team-member-card {
-  animation: appear linear both;
-  animation-timeline: view();
-  animation-range: 
-    entry 0% cover 40%,  /* Appear during first 40% of entry */
-    exit 60% cover 100%; /* Disappear during last 40% of exit */
+    .vertical-content-blurb {
+        font-size: 1.40em;
+    }
+    .horizontal-content-blurb {
+        font-size: 1.40em;
+    }
+    .banner {
+        font-size: 1.70em;
+    }
 }
